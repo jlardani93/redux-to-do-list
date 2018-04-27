@@ -5,12 +5,21 @@ import { connect } from 'react-redux'
 function Item(props){
 
   function handleRemoveItem(){
-    const { dispatch } = props;
+    const { dispatch } = props
     const action = {
       type: 'REMOVE_ITEM',
       id: props.item.id
     }
-    dispatch(action);
+    dispatch(action)
+  }
+
+  function handleUpdateItem(){
+    const { dispatch } = props
+    const action = {
+      type: 'SET_ACTIVEITEM',
+      id: props.item.id
+    }
+    dispatch(action)
   }
 
   return(
@@ -20,13 +29,13 @@ function Item(props){
       <h4>{props.item.dueDate}</h4>
       <h4>{props.item.timeActive}</h4>
       <button onClick={handleRemoveItem}>Remove Item</button>
+      <button onClick={handleUpdateItem}>Update Item</button>
     </div>
   )
 }
 
 Item.propTypes = {
   item: PropTypes.object.isRequired,
-  key: PropTypes.string.isRequired
 }
 
-export default connect()(Item);
+export default connect()(Item)

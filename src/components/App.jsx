@@ -22,13 +22,15 @@ class App extends React.Component {
 
   updateActiveTimes(){
     const { dispatch } = this.props;
-    Object.keys(this.props.toDoList).map(key => {
-      const action = {
-        type: 'UPDATE_TIMES',
-        id: key
-      }
-      dispatch(action);
-    })
+    if (this.props.toDoList){
+      Object.keys(this.props.toDoList).map(key => {
+        const action = {
+          type: 'UPDATE_TIMES',
+          id: key
+        }
+        dispatch(action);
+      })
+    }
   }
 
   render(){
@@ -46,7 +48,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    toDoList: state
+    toDoList: state.toDoList
   }
 }
 

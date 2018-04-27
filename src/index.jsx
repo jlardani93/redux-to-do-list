@@ -7,19 +7,19 @@ import { createStore } from 'redux'
 import toDoListReducer from './reducers/to-do-list-reducer'
 import { Provider } from 'react-redux'
 
-const store = createStore(toDoListReducer);
+const store = createStore(toDoListReducer)
 
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())
-); 
+) 
 
 const render = (Component) => {
   ReactDOM.render(
-      <HashRouter>
-        <Provider store={store}>
-          <Component/>
-        </Provider>
-      </HashRouter>,
+    <HashRouter>
+      <Provider store={store}>
+        <Component/>
+      </Provider>
+    </HashRouter>,
     document.getElementById('react-app-root')
   )
 }

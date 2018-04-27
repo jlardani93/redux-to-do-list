@@ -1,28 +1,29 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { v4 } from 'uuid'
-import Moment from 'moment'
 
-function NewItem(props){
-  console.log(props)
-  let {_description, _dueDate} = [null, null]
+function UpdateItem(props){
+  let _description = null
+  let _dueDate = null
 
   function handleFormSubmission(event){
-    event.preventDefault()
+    event.preventDefault(); 
     const { dispatch } = props
-    const action = {
-      type: 'ADD_ITEM',
+    const firstAction = {
+      type: 'UPDATE_ITEM',
+      id: props.item.id,
       description: _description.value,
-      dueDate: _dueDate.value,
-      id: v4(),
-      creationTime: new Moment()
+      dueDate: _dueDate.value
     }
-    dispatch(action);
-    [_description.value, _dueDate.value] = ['','']
+    dispatch(firstAction)
+
+    const secondAction = {
+      type: 'SET_ACTIVEITEM',
+      id: null
+    }
+    dispatch(secondAction)
   }
 
-  return (
+  return(
     <div>
       <form onSubmit={handleFormSubmission}>
         <div className="formGroup">
@@ -30,6 +31,7 @@ function NewItem(props){
           <input
             type="text"
             id="description"
+            defaultValue={props.item.description}
             ref={(element) => {_description = element}}></input>
         </div>
         <div className="formGroup">
@@ -37,13 +39,13 @@ function NewItem(props){
           <input
             type="text"
             id="description"
+            defaultValue={props.item.description}
             ref={(element) => {_dueDate = element}}></input>
         </div>
-        <button type="submit">Create New Item</button>
+        <button type="submit">Update Item</button>
       </form>
     </div>
   )
 }
 
-NewItem = connect()(NewItem)
-export default NewItem
+export default connect()(UpdateItem)
