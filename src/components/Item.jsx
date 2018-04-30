@@ -6,11 +6,15 @@ function Item(props){
 
   function handleRemoveItem(){
     const { dispatch } = props
-    const action = {
+    const firstAction = {
       type: 'REMOVE_ITEM',
       id: props.item.id
-    }
-    dispatch(action)
+    };
+    const secondAction = {
+      type: 'INCREMENT'
+    };
+    dispatch(firstAction);
+    dispatch(secondAction);
   }
 
   function handleUpdateItem(){

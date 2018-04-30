@@ -37,6 +37,9 @@ class App extends React.Component {
     return(
       <div>
         <Header />
+        <div>
+          <p>Tasks Completed: {this.props.tasksCompleted}</p>
+        </div>
         <Switch>
           <Route exact path="/" component={ToDoList} />
         </Switch>
@@ -48,7 +51,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    toDoList: state.toDoList
+    toDoList: state.toDoList.toDoList,
+    tasksCompleted: state.completedActions.tasksCompleted
   }
 }
 

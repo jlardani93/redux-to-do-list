@@ -28,8 +28,8 @@ function ToDoList(props){
 
 const mapStateToProps = state => {
   return {
-    toDoList: state.toDoList,
-    activeItem: state.activeItem
+    toDoList: state.toDoList.toDoList,
+    activeItem: state.toDoList.activeItem
   }
 }
 
