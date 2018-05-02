@@ -1,29 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import c from './../constants'
+import * as actions from './../actions'
 
 function Item(props){
 
   function handleRemoveItem(){
     const { dispatch } = props
-    const firstAction = {
-      type: 'REMOVE_ITEM',
-      id: props.item.id
-    };
-    const secondAction = {
-      type: 'INCREMENT'
-    };
-    dispatch(firstAction);
-    dispatch(secondAction);
+    dispatch(actions.removeItem(props.item.id))
+    dispatch(actions.increment())
   }
 
   function handleUpdateItem(){
     const { dispatch } = props
-    const action = {
-      type: 'SET_ACTIVEITEM',
-      id: props.item.id
-    }
-    dispatch(action)
+    dispatch(actions.setActiveItem(props.item.id))
   }
 
   return(

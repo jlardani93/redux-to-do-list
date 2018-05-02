@@ -1,10 +1,13 @@
 import React from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Link } from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
 import Moment from 'moment'
 import ToDoList from './ToDoList'
+import MusicInterface from './MusicInterface'
 import { connect } from 'react-redux'
+import c from './../constants'
+import * as actions from './../actions'
 
 class App extends React.Component {
 
@@ -24,24 +27,32 @@ class App extends React.Component {
     const { dispatch } = this.props;
     if (this.props.toDoList){
       Object.keys(this.props.toDoList).map(key => {
-        const action = {
-          type: 'UPDATE_TIMES',
-          id: key
-        }
-        dispatch(action);
+        dispatch(actions.updateTimes(key));
       })
     }
   }
 
   render(){
+
+    let linkButton;
+    let currentLocation = this.props.location.pathname;
+    //CHANGES LINK SHOWN ON PAGE DEPENDING ON PART OF SITE CURRENTLY VISIBLE
+    if (currentLocation === '/') {
+      linkButton = <Link to='/Music'><button>Music Interface</button></Link>;
+    } else {
+      linkButton = <Link to='/'><button>Return to Main Page</button></Link>;
+    }
+
     return(
       <div>
         <Header />
         <div>
           <p>Tasks Completed: {this.props.tasksCompleted}</p>
+          {linkButton}
         </div>
         <Switch>
           <Route exact path="/" component={ToDoList} />
+          <Route exact path="/Music" component={MusicInterface} />
         </Switch>
         <Footer />
       </div>

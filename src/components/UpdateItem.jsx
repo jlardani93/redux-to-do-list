@@ -1,26 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import c from './../constants'
+import * as actions from './../actions'
 
 function UpdateItem(props){
   let _description = null
   let _dueDate = null
 
   function handleFormSubmission(event){
-    event.preventDefault(); 
+    event.preventDefault()
     const { dispatch } = props
-    const firstAction = {
-      type: 'UPDATE_ITEM',
-      id: props.item.id,
-      description: _description.value,
-      dueDate: _dueDate.value
-    }
-    dispatch(firstAction)
-
-    const secondAction = {
-      type: 'SET_ACTIVEITEM',
-      id: null
-    }
-    dispatch(secondAction)
+    dispatch(actions.updateItem(props.item.id, _description.value, _dueDate.value))
+    dispatch(actions.setActiveItem(null))
   }
 
   return(

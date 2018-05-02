@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { v4 } from 'uuid'
 import Moment from 'moment'
+import c from './../constants'
+import * as actions from './../actions'
 
 function NewItem(props){
   console.log(props)
@@ -11,14 +13,7 @@ function NewItem(props){
   function handleFormSubmission(event){
     event.preventDefault()
     const { dispatch } = props
-    const action = {
-      type: 'ADD_ITEM',
-      description: _description.value,
-      dueDate: _dueDate.value,
-      id: v4(),
-      creationTime: new Moment()
-    }
-    dispatch(action);
+    dispatch(actions.addItem(_description.value, _dueDate.value, v4(), new Moment()));
     [_description.value, _dueDate.value] = ['','']
   }
 

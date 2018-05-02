@@ -12,7 +12,7 @@ function ToDoList(props){
 
       {(props.toDoList)
         ? Object.values(props.toDoList).map(item =>
-        <Item item={item} key={item.id} />
+          <Item item={item} key={item.id} />
         )
         : <span>There are currently no items in your toDoList</span>}
 
